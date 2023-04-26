@@ -13,10 +13,16 @@ class SecondViewController: UIViewController {
     
     var id: String?
     
+    private let Logo: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "logo"), for: .normal)
+        return button
+    }()
+
     private let GreetingLabel: UILabel = {
         let label = UILabel()
         label.text = "반가워요!"
-        label.font = .systemFont(ofSize: 30)
+        label.font = .systemFont(ofSize: 23)
         label.textColor = .white
         return label
     }()
@@ -24,8 +30,9 @@ class SecondViewController: UIViewController {
     private lazy var MainButton: UIButton = {
         let button = UIButton()
         button.setTitle("메인으로", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .red
+        button.backgroundColor = UIColor(hexCode: "FF143C")
         button.layer.cornerRadius = 8.0
         button.addTarget(self, action: #selector(pushToFirstViewController), for: .touchUpInside)
         return button
@@ -50,8 +57,15 @@ private extension SecondViewController{
     }
     
     func setLayout(){
-        [GreetingLabel, MainButton].forEach {
+        [Logo, GreetingLabel, MainButton].forEach {
             view.addSubview($0)
+        }
+        
+        Logo.snp.makeConstraints{
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().offset(58)
+            $0.height.equalTo(210)
+            $0.leading.trailing.equalToSuperview()
         }
         
         GreetingLabel.snp.makeConstraints{
