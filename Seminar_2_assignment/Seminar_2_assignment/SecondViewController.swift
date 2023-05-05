@@ -11,12 +11,12 @@ import SnapKit
 
 class SecondViewController: UIViewController {
     
-    var id: String?
+    var name: String?
     
-    private let Logo: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "logo"), for: .normal)
-        return button
+    private let LogoView: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "logo")
+        return image
     }()
 
     private let GreetingLabel: UILabel = {
@@ -34,7 +34,7 @@ class SecondViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = UIColor(hexCode: "FF143C")
         button.layer.cornerRadius = 8.0
-        button.addTarget(self, action: #selector(pushToFirstViewController), for: .touchUpInside)
+        button.addTarget(self, action: #selector(pushToMainViewController), for: .touchUpInside)
         return button
     }()
 
@@ -42,12 +42,8 @@ class SecondViewController: UIViewController {
         super.viewDidLoad()
         setStyle()
         setLayout()
-        dataBind()
     }
-    
-    func dataBind() {
-        GreetingLabel.text = "\(id!)님 반가워요!"
-    }
+
 }
 
 
@@ -57,11 +53,11 @@ private extension SecondViewController{
     }
     
     func setLayout(){
-        [Logo, GreetingLabel, MainButton].forEach {
+        [LogoView, GreetingLabel, MainButton].forEach {
             view.addSubview($0)
         }
         
-        Logo.snp.makeConstraints{
+        LogoView.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(58)
             $0.height.equalTo(210)
@@ -80,10 +76,12 @@ private extension SecondViewController{
             $0.height.equalTo(50)
         }
     }
-    
+
     @objc
-    func pushToFirstViewController() {
-        let firstViewController = FirstViewController()
-        present(firstViewController, animated: true)
-    }
+    func pushToMainViewController() {
+        let mainViewController = MainViewController()
+        self.navigationController?.pushViewController(mainViewController, animated: true)
+        }
+
 }
+

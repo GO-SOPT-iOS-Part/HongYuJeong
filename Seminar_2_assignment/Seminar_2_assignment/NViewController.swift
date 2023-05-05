@@ -33,6 +33,7 @@ class NViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 8.0
         button.addTarget(self, action: #selector(dismissNViewController), for: .touchUpInside)
+        button.addTarget(self, action: #selector(sendtoSecondViewController), for: .touchUpInside)
         return button
     }()
     
@@ -47,6 +48,7 @@ private extension NViewController {
     
     func setStyle() {
         view.backgroundColor = .white
+
     }
     
     func setLayout(){
@@ -76,5 +78,12 @@ private extension NViewController {
     @objc
     func dismissNViewController() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc
+    func sendtoSecondViewController() {
+        let firstViewController = FirstViewController()
+        guard let nickname = NicknameTextField.text else { return }
+        firstViewController.nickname = nickname
     }
 }

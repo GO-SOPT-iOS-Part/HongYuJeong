@@ -10,6 +10,8 @@ import SnapKit
 
 final class FirstViewController: UIViewController, UITextFieldDelegate {
     
+    var nickname: String?
+    
     private let BackButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "btn_before"), for: .normal)
@@ -99,6 +101,8 @@ final class FirstViewController: UIViewController, UITextFieldDelegate {
         setLayout()
         
     }
+
+
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.layer.borderColor = UIColor.white.cgColor
@@ -202,8 +206,6 @@ private extension FirstViewController {
     @objc
     func pushToSecondViewController() {
         let secondViewController = SecondViewController()
-        guard let id = IDTextField.text else { return }
-        secondViewController.id = id
         self.navigationController?.pushViewController(secondViewController, animated: true)
         }
 }
